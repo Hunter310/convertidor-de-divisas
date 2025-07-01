@@ -24,9 +24,9 @@ Este proyecto fue desarrollado como parte de una prueba técnica, cumpliendo con
 
 ## Instalación
 
-1.  **Clona el repositorio:**
+1.  **Clona el repositorio y accede:**
     ```bash
-    git clone [https://github.com/Hunter310/convertidor-de-divisas.git](https://github.com/Hunter310/convertidor-de-divisas.git)
+    git clone https://github.com/Hunter310/convertidor-de-divisas.git
     cd convertidor-de-divisas
     ```
 
@@ -45,8 +45,8 @@ El programa requiere una clave API para funcionar. La clave ya está integrada e
 const apiKey = "fca_live_2v0ZnRqQM4mCYQPYlNzEu4fKsnEpC4okcOer0Pye";
 ```
 ## Uso
+- Para iniciar la aplicación, ejecuta el siguiente comando en la terminal desde la raíz del proyecto:
 ```bash
-//Para iniciar la aplicación, ejecuta el siguiente comando en la terminal desde la raíz del proyecto:
 node convertidor.js
 ```
 **Una vez iniciado, el programa te mostrará un menú interactivo. Simplemente sigue las instrucciones en pantalla para realizar las conversiones.**
