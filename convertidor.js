@@ -137,11 +137,11 @@ const listAllRates = (rates) => {
  * @returns {Promise<string>} El código de la moneda validado, en mayúsculas.
  */
 const setCurrency = async (rates, promptMessage) => {
-    // Bucle infinito que solo se romperá cuando el usuario ingrese una moneda válida.
+    // eslint-disable-next-line no-constant-condition
     while (true) {
         const code = (await question(`${promptMessage} (ej. USD, EUR, AUD): `)).toUpperCase().trim();
-        // Validamos si la moneda ingresada existe como una clave en nuestro objeto de tasas.
-        if (rates.hasOwnProperty(code)) {
+        // CORRECCIÓN: Usamos una forma más segura de verificar si la propiedad existe.
+        if (Object.prototype.hasOwnProperty.call(rates, code)) {
             return code; // Si es válida, la devolvemos y salimos del bucle.
         } else {
             console.log('Error: Código de moneda no válido. Intente de nuevo.');
@@ -154,6 +154,7 @@ const setCurrency = async (rates, promptMessage) => {
  * @returns {Promise<number>} La cantidad validada.
  */
 const setAmount = async () => {
+    // eslint-disable-next-line no-constant-condition
     while (true) {
         const amountStr = await question('Ingrese la cantidad a convertir (ej. 150.75): ');
         const amount = parseFloat(amountStr); // Intentamos convertir el texto a un número.
@@ -232,6 +233,7 @@ const main = async () => {
     const conversionHistory = []; // Un array para guardar el historial.
 
     // 3. Bucle principal del programa. Se ejecutará indefinidamente hasta que el usuario elija salir.
+    // eslint-disable-next-line no-constant-condition
     while (true) {
         // Mostramos el menú en cada iteración.
         displayMenu(fromCurrency, toCurrency, amount);
@@ -240,33 +242,28 @@ const main = async () => {
         // El 'switch' es como una serie de 'if/else if' para manejar la opción del usuario.
         // Revisa qué número eligió el usuario y ejecuta el bloque de código correspondiente.
         switch (choice.trim()) {
-            // Caso 1: Si el usuario teclea '1'
             case '1':
                 // Llama a la función para mostrar la lista de todas las monedas disponibles.
                 listAvailableCurrencies(exchangeRates);
                 break; // 'break' termina este caso y evita que se ejecuten los siguientes.
 
-            // Caso 2: Si el usuario teclea '2'
             case '2':
                 // Llama a la función para mostrar todas las tasas de cambio contra el USD.
                 listAllRates(exchangeRates);
                 break;
 
-            // Caso 3: Si el usuario teclea '3'
             case '3':
                 // Llama a la función que pide al usuario la moneda de origen y la guarda.
                 // El resultado de `setCurrency` se almacena en la variable `fromCurrency`.
                 fromCurrency = await setCurrency(exchangeRates, 'Establecer moneda de Origen');
                 break;
 
-            // Caso 4: Si el usuario teclea '4'
             case '4':
                 // Llama a la función que pide al usuario la moneda de destino y la guarda.
                 toCurrency = await setCurrency(exchangeRates, 'Establecer moneda de Destino');
                 break;
-            
-            // Caso 5: Si el usuario teclea '5'
-            case '5':
+
+            case '5': { // CORRECCIÓN: Se añaden llaves para crear un nuevo scope.
                 // Primero, pide al usuario que ingrese la cantidad.
                 const tempAmount = await setAmount();
                 // Si el usuario ingresó una cantidad válida...
@@ -283,21 +280,19 @@ const main = async () => {
                     }
                 }
                 break;
+            }
 
-            // Caso 6: Si el usuario teclea '6'
             case '6':
                 // Llama a la función que muestra en pantalla todo el historial de la sesión.
                 viewHistory(conversionHistory);
                 break;
 
-            // Caso 7: Si el usuario teclea '7'
             case '7':
                 // Muestra un mensaje de despedida.
                 console.log('\nGracias por usar el Convertidor de Divisas. ¡Adiós!');
                 rl.close(); // Cerramos la interfaz. Esto permite que el programa termine.
                 return; // Salimos del bucle 'while' y de la función 'main' para finalizar el programa.
 
-            // Si el usuario no teclea ninguno de los números anteriores...
             default:
                 // Le mostramos un mensaje indicando que la opción es incorrecta.
                 console.log('\nOpción no válida. Por favor, intente de nuevo.');
@@ -309,8 +304,13 @@ const main = async () => {
 };
 
 // --- INICIO DE LA APLICACIÓN ---
-// Esta es la primera línea que se ejecuta. Llama a la función 'main' para empezar todo el proceso.
-main();
+// Esta condición evita que la función main() se ejecute automáticamente
+// cuando el archivo es importado por otro script (como Jest).
+// Solo se ejecutará cuando corras el archivo directamente con `node convertidor.js`.
+if (require.main === module) {
+    main();
+}
 
 // Se exportan las funciones que se van a probar con Jest.
-module.exports = { performConversion, fetchExchangeRates };
+// CORRECCIÓN: Se exporta también 'rl' para que las pruebas puedan cerrarlo.
+module.exports = { performConversion, fetchExchangeRates, rl };
