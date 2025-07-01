@@ -26,7 +26,7 @@ Este proyecto fue desarrollado como parte de una prueba técnica, cumpliendo con
 
 1.  **Clona el repositorio y accede:**
     ```bash
-    git clone [https://github.com/Hunter310/convertidor-de-divisas.git](https://github.com/Hunter310/convertidor-de-divisas.git)
+    git clone https://github.com/Hunter310/convertidor-de-divisas.git
     cd convertidor-de-divisas
     ```
 
