@@ -14,7 +14,7 @@ Este proyecto fue desarrollado como parte de una prueba técnica, cumpliendo con
     - Establecer una moneda de origen y una de destino.
     - Ingresar una cantidad y realizar la conversión.
     - Ver un historial de las conversiones realizadas durante la sesión.
-- **Validación de Entradas**: El programa valida las entradas del usuario para asegurar que los códigos de moneda y las cantidades sean correctos.
+- **Validación de Entradas**: El programa valida las entradas del usuario para asegurar que sean correctas como las opciones del menú, los códigos de moneda y las cantidades a convertir.
 
 ## Requisitos Previos
 
@@ -50,3 +50,19 @@ const apiKey = "fca_live_2v0ZnRqQM4mCYQPYlNzEu4fKsnEpC4okcOer0Pye";
 node convertidor.js
 ```
 **Una vez iniciado, el programa te mostrará un menú interactivo. Simplemente sigue las instrucciones en pantalla para realizar las conversiones.**
+
+## Pruebas (Tests)
+
+El proyecto utiliza Jest para las pruebas unitarias. Para ejecutar las pruebas, usa el siguiente comando:
+
+```javascript
+npm test
+```
+
+## Linter
+
+Se utiliza ESLint para mantener un estilo de código limpio y consistente. Para verificar el código con el linter, ejecuta:
+
+```javascript
+npm run lint
+```
