@@ -14,7 +14,7 @@ Este proyecto fue desarrollado como parte de una prueba técnica, cumpliendo con
     - Establecer una moneda de origen y una de destino.
     - Ingresar una cantidad y realizar la conversión.
     - Ver un historial de las conversiones realizadas durante la sesión.
-- **Validación de Entradas**: El programa valida las entradas del usuario para asegurar que las opciones del menú, los códigos de moneda y las cantidades sean correctas.
+- **Validación de Entradas**: El programa valida las entradas del usuario para asegurar que sean correctas las opciones del menú, los códigos de moneda y las cantidades a convertir.
 
 ## Requisitos Previos
 
