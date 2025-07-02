@@ -242,61 +242,61 @@ const main = async () => {
         // El 'switch' es como una serie de 'if/else if' para manejar la opción del usuario.
         // Revisa qué número eligió el usuario y ejecuta el bloque de código correspondiente.
         switch (choice.trim()) {
-            case '1':
-                // Llama a la función para mostrar la lista de todas las monedas disponibles.
-                listAvailableCurrencies(exchangeRates);
-                break; // 'break' termina este caso y evita que se ejecuten los siguientes.
+        case '1':
+            // Llama a la función para mostrar la lista de todas las monedas disponibles.
+            listAvailableCurrencies(exchangeRates);
+            break; // 'break' termina este caso y evita que se ejecuten los siguientes.
 
-            case '2':
-                // Llama a la función para mostrar todas las tasas de cambio contra el USD.
-                listAllRates(exchangeRates);
-                break;
+        case '2':
+            // Llama a la función para mostrar todas las tasas de cambio contra el USD.
+            listAllRates(exchangeRates);
+            break;
 
-            case '3':
-                // Llama a la función que pide al usuario la moneda de origen y la guarda.
-                // El resultado de `setCurrency` se almacena en la variable `fromCurrency`.
-                fromCurrency = await setCurrency(exchangeRates, 'Establecer moneda de Origen');
-                break;
+        case '3':
+            // Llama a la función que pide al usuario la moneda de origen y la guarda.
+            // El resultado de `setCurrency` se almacena en la variable `fromCurrency`.
+            fromCurrency = await setCurrency(exchangeRates, 'Establecer moneda de Origen');
+            break;
 
-            case '4':
-                // Llama a la función que pide al usuario la moneda de destino y la guarda.
-                toCurrency = await setCurrency(exchangeRates, 'Establecer moneda de Destino');
-                break;
+        case '4':
+            // Llama a la función que pide al usuario la moneda de destino y la guarda.
+            toCurrency = await setCurrency(exchangeRates, 'Establecer moneda de Destino');
+            break;
 
-            case '5': { // CORRECCIÓN: Se añaden llaves para crear un nuevo scope.
-                // Primero, pide al usuario que ingrese la cantidad.
-                const tempAmount = await setAmount();
-                // Si el usuario ingresó una cantidad válida...
-                if (tempAmount) {
-                    amount = tempAmount; // ...la guardamos en nuestra variable de estado.
-                    // Luego, llamamos a la función que hace la conversión.
-                    const [result, historyItem] = performConversion(exchangeRates, fromCurrency, toCurrency, amount);
-                    // Mostramos el resultado en la pantalla.
-                    console.log('\n--- Resultado de la Conversión ---');
-                    console.log(result);
-                    // Si la conversión fue exitosa, añadimos la operación al historial.
-                    if (historyItem) {
-                        conversionHistory.push(historyItem);
-                    }
+        case '5': { // CORRECCIÓN: Se añaden llaves para crear un nuevo scope.
+            // Primero, pide al usuario que ingrese la cantidad.
+            const tempAmount = await setAmount();
+            // Si el usuario ingresó una cantidad válida...
+            if (tempAmount) {
+                amount = tempAmount; // ...la guardamos en nuestra variable de estado.
+                // Luego, llamamos a la función que hace la conversión.
+                const [result, historyItem] = performConversion(exchangeRates, fromCurrency, toCurrency, amount);
+                // Mostramos el resultado en la pantalla.
+                console.log('\n--- Resultado de la Conversión ---');
+                console.log(result);
+                // Si la conversión fue exitosa, añadimos la operación al historial.
+                if (historyItem) {
+                    conversionHistory.push(historyItem);
                 }
-                break;
             }
+            break;
+        }
 
-            case '6':
-                // Llama a la función que muestra en pantalla todo el historial de la sesión.
-                viewHistory(conversionHistory);
-                break;
+        case '6':
+            // Llama a la función que muestra en pantalla todo el historial de la sesión.
+            viewHistory(conversionHistory);
+            break;
 
-            case '7':
-                // Muestra un mensaje de despedida.
-                console.log('\nGracias por usar el Convertidor de Divisas. ¡Adiós!');
-                rl.close(); // Cerramos la interfaz. Esto permite que el programa termine.
-                return; // Salimos del bucle 'while' y de la función 'main' para finalizar el programa.
+        case '7':
+            // Muestra un mensaje de despedida.
+            console.log('\nGracias por usar el Convertidor de Divisas. ¡Adiós!');
+            rl.close(); // Cerramos la interfaz. Esto permite que el programa termine.
+            return; // Salimos del bucle 'while' y de la función 'main' para finalizar el programa.
 
-            default:
-                // Le mostramos un mensaje indicando que la opción es incorrecta.
-                console.log('\nOpción no válida. Por favor, intente de nuevo.');
-                break;
+        default:
+            // Le mostramos un mensaje indicando que la opción es incorrecta.
+            console.log('\nOpción no válida. Por favor, intente de nuevo.');
+            break;
         }
         // Hacemos una pausa para que el usuario pueda ver el resultado de su acción antes de limpiar la pantalla.
         await question('\nPresione Enter para volver al menú...');
