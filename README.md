@@ -50,3 +50,19 @@ const apiKey = "fca_live_2v0ZnRqQM4mCYQPYlNzEu4fKsnEpC4okcOer0Pye";
 node convertidor.js
 ```
 **Una vez iniciado, el programa te mostrará un menú interactivo. Simplemente sigue las instrucciones en pantalla para realizar las conversiones.**
+
+## Pruebas (Tests)
+
+El proyecto utiliza Jest para las pruebas unitarias. Para ejecutar las pruebas, usa el siguiente comando:
+
+```javascript
+npm test
+```
+
+## Linter
+
+Se utiliza ESLint para mantener un estilo de código limpio y consistente. Para verificar el código con el linter, ejecuta:
+
+```javascript
+npm run lint
+```
